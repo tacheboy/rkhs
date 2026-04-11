@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kernel Labs</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background-color: #030512;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #0b1c3a, #03050e 65%);
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 20px 28px;
+      background: rgba(5, 9, 22, 0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
+      color: #7dd3fc;
+    }
+    header p {
+      margin: 0;
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+    main {
+      padding: 32px;
+      display: grid;
+      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      flex: 1;
+    }
+    .card {
+      background: rgba(12, 18, 37, 0.85);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .card h2 {
+      margin: 0;
+      color: #e0f2fe;
+      font-size: 1.2rem;
+    }
+    .card p {
+      margin: 0;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+    .cta {
+      align-self: flex-start;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(125,211,252,0.6);
+      color: #7dd3fc;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    .cta:hover {
+      background: rgba(125,211,252,0.1);
+    }
+    footer {
+      padding: 18px 28px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      background: rgba(5, 9, 22, 0.85);
+      font-size: 0.85rem;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kernel Labs</h1>
+    <p>Intuition-driven playgrounds for RKHS theory and SVM geometry.</p>
+  </header>
+  <main>
+    <article class="card">
+      <h2>RKHS Explainer</h2>
+      <p>Explore the geometry and functional-analytic intuition behind kernels, RKHS norms, and ridge regression in a full-page, responsive layout.</p>
+      <a class="cta" href="rkhs.html">Open RKHS deep dive</a>
+    </article>
+    <article class="card">
+      <h2>SVM Explorer</h2>
+      <p>Play with decision boundaries, soft margins, and the kernel trick in a dedicated canvas. Add points, tune C, visualize SVs, and inspect formulas.</p>
+      <a class="cta" href="svm.html">Open SVM explorer</a>
+    </article>
+  </main>
+  <footer>
+    <span>Best viewed served over <code>http://localhost</code> (see README for a quick server command).</span>
+    <span>Use your browser devtools console for errors.</span>
+  </footer>
+</body>
+</html>
