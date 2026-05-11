@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RKHS Explorer</title>
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #020617;
+      color: #f8fafc;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .status {
+      max-width: 680px;
+      margin: 24px;
+      padding: 18px 22px;
+      border: 1px solid rgba(251, 191, 36, 0.32);
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.88);
+      color: #cbd5e1;
+      line-height: 1.6;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+    .status strong { color: #fbbf24; }
+  </style>
+</head>
+<body>
+  <div id="rkhs-explore-root">
+    <div class="status">
+      <strong>Loading RKHS Explorer...</strong><br>
+      If this message stays, check whether React, Babel, Tailwind, or rkhs_explore.jsx failed to load.
+    </div>
+  </div>
+
+  <script>
+    const originalWarn = console.warn;
+    console.warn = (...args) => {
+      const message = String(args[0] || "");
+      const isKnownLocalWarning =
+        message.includes("cdn.tailwindcss.com should not be used in production") ||
+        message.includes("You are using the in-browser Babel transformer");
+
+      if (!isKnownLocalWarning) originalWarn(...args);
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel" data-presets="react" src="rkhs_explore.jsx"></script>
+  <script type="text/babel">
+    const exploreRoot = document.getElementById('rkhs-explore-root');
+
+    if (!window.React || !window.ReactDOM) {
+      exploreRoot.innerHTML = '<div class="status"><strong>React failed to load.</strong><br>Check your internet connection or CDN blocking, then refresh.</div>';
+    } else if (!window.RKHSTutorial) {
+      exploreRoot.innerHTML = '<div class="status"><strong>RKHS Explorer component not found.</strong><br>Make sure rkhs_explore.jsx loads without errors in the console.</div>';
+    } else {
+      ReactDOM.createRoot(exploreRoot).render(<RKHSTutorial />);
+    }
+  </script>
+</body>
+</html>

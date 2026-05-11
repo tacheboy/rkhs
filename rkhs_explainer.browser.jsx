@@ -9,6 +9,55 @@ const SECTIONS = [
   { id: "apps", label: "⑥ Applications", icon: "∑" },
 ];
 
+const mathScriptStyle = {
+  fontSize: "0.72em",
+  lineHeight: 0,
+};
+
+function readScriptGroup(text, start) {
+  if (text[start] === "{") {
+    const end = text.indexOf("}", start + 1);
+    if (end !== -1) {
+      return { value: text.slice(start + 1, end), next: end + 1 };
+    }
+  }
+
+  return { value: text[start] || "", next: start + 1 };
+}
+
+function renderMathText(text) {
+  const parts = [];
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+
+    if ((char === "_" || char === "^") && i + 1 < text.length) {
+      const group = readScriptGroup(text, i + 1);
+      const Tag = char === "_" ? "sub" : "sup";
+      parts.push(
+        <Tag key={`${char}-${i}`} style={mathScriptStyle}>
+          {group.value}
+        </Tag>
+      );
+      i = group.next - 1;
+      continue;
+    }
+
+    parts.push(char);
+  }
+
+  return parts;
+}
+
+const renderTexChildren = (children) =>
+  React.Children.toArray(children).map((child, i) =>
+    typeof child === "string" ? (
+      <React.Fragment key={i}>{renderMathText(child)}</React.Fragment>
+    ) : (
+      child
+    )
+  );
+
 const Tex = ({ children, block }) =>
   block ? (
     <div style={{
@@ -23,13 +72,13 @@ const Tex = ({ children, block }) =>
       margin: "12px 0",
       color: "#e0f2fe",
       overflowX: "auto"
-    }}>{children}</div>
+    }}>{renderTexChildren(children)}</div>
   ) : (
     <span style={{
       fontFamily: "'Georgia', serif",
       color: "#bae6fd",
       padding: "0 2px"
-    }}>{children}</span>
+    }}>{renderTexChildren(children)}</span>
   );
 
 const Callout = ({ type, children }) => {
@@ -634,7 +683,7 @@ const CONTENT = {
         </p>
         <Tex block>fₗ = Σᵢ αₗᵢ φ̃(xᵢ)</Tex>
         <p style={{ color: "#94a3b8", lineHeight: 1.8, marginBottom: "10px" }}>
-          Projecting the eigenvalue equation onto each <Tex>φ̃(xq)</Tex> and using the reproducing property, the infinite-dimensional problem reduces to:
+          Projecting the eigenvalue equation onto each <Tex>φ̃(x_q)</Tex> and using the reproducing property, the infinite-dimensional problem reduces to:
         </p>
         <Tex block>nλₗ αₗ = K̃ αₗ   where K̃ = HKH</Tex>
         <p style={{ color: "#94a3b8", lineHeight: 1.8, marginBottom: "10px" }}>
