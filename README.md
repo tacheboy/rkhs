@@ -1,7 +1,10 @@
 # rkhs
 A small reading on RKHS and SVMs
 
-On a terminal -> run: git clone https://github.com/tacheboy/rkhs.git
+On a terminal -> run: 
+```
+git clone https://github.com/tacheboy/rkhs.git
+```
 
 To See the webpages: 
 
