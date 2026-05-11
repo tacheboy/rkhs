@@ -13,6 +13,13 @@ Run:
 ```
 python -m http.server 8000
 ```
-And you have stuff running on http://localhost:8000/ 
+And you have stuff running on http://localhost:8000/
+
+The three pages you can look at will be:
+http://localhost:8000/rkhs.html
+http://localhost:8000/svm.html
+http://localhost:8000/rkhs_explore.html
+
+
 
 I will be updating this. Stay Tuned
